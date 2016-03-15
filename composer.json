@@ -1,0 +1,27 @@
+{
+    "name": "minecraft/framework",
+    "authors": [
+        {
+            "name": "GeekMan"
+        }
+    ],
+    "require": {
+        "php": ">=5.4.0",
+        "illuminate/database": "*",
+        "phpmailer/phpmailer": "~5.2",
+        "intervention/image": "*",
+        "gregwar/captcha": "*",
+        "bistro/session":"*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Minecraft\\": "src/Minecraft/"
+        }
+    },
+    "repositories": {
+        "packagist": {
+            "type": "composer",
+            "url": "https://packagist.phpcomposer.com"
+        }
+    }
+}
