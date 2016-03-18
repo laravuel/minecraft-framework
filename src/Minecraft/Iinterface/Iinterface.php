@@ -7,6 +7,14 @@ class Iinterface {
     static $interfaces;
     
     protected $resData = [];
+    public $pager = [];
+    
+    public function __construct() {
+        $this->pager['page'] = intval($_GET['page']) ? intval($_GET['page']) : 0;
+        $this->pager['length'] = intval($_GET['length']) ? intval($_GET['length']) : 10;
+        $this->pager['start'] = $this->pager['page'] * $this->pager['length'] - $this->pager['length'];
+        $this->pager = json_decode(json_encode($this->pager));
+    }
     
     public static function init(\Minecraft\Router\Route $route) {
 
