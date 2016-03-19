@@ -5,7 +5,7 @@ class Front {
     
     static $route;
     public $webPath = '';
-    public $res = '{}';
+    public $res = [];
     
     public function __construct() {
         $this->webPath = \Minecraft\App::$config['WebPath'];

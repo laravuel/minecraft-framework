@@ -16,6 +16,5 @@ class AutoRequest extends \Minecraft\Iinterface\Iinterface {
         foreach($this->frontRoute->autoRequests as $name=>$request) {
             $front->res[$name] = $this->process($request, $this->frontRoute->paramets);
         }
-        $front->res = json_encode($front->res);
     }
 }
