@@ -4,6 +4,11 @@ namespace Minecraft\Front;
 class Front {
     
     static $route;
+    public $webPath = '';
+    
+    public function __construct() {
+        $this->webPath = \Minecraft\App::$config['WebPath'];
+    }
     
     public static function init(\Minecraft\Router\Route $route) {
         
