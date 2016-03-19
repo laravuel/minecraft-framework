@@ -5,6 +5,7 @@ class Front {
     
     static $route;
     public $webPath = '';
+    public $res = '{}';
     
     public function __construct() {
         $this->webPath = \Minecraft\App::$config['WebPath'];
@@ -18,6 +19,10 @@ class Front {
         }
         self::$route = $route;
         return new static;
+    }
+    
+    public function __get($name) {
+        return self::$route->paramets[$name];
     }
     
     public function load(\Minecraft\Front\Pretreat $pretreat, \Minecraft\Iinterface\AutoRequest $autoRequest) {
@@ -34,13 +39,13 @@ class Front {
             $pretreat->init(self::$route, $this);
         }
         
-        foreach($fronts as $nFront) {
-            $this->import($nFront);
-        }
-        
         /* 是否需要自动请求接口 */
         if(self::$route->autoRequests) {
-            $autoRequest->init(self::$route);
+            $autoRequest->request(self::$route, $this);
+        }
+        
+        foreach($fronts as $nFront) {
+            $this->import($nFront);
         }
     }
     

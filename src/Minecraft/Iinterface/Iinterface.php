@@ -41,8 +41,14 @@ class Iinterface {
             $this->removeElement(self::$route->pretreats);
             $pretreat->init(self::$route, $this);
         }
+        $resData = $this->process(self::$route->route['interface'], self::$route->paramets);
+        
+        self::res($resData);
+    }
+    
+    public function process($interface, $paramets) {
         $space = \Minecraft\App::$config['interfaces'];
-        list($path, $method) = explode('.', self::$route->route['interface']);
+        list($path, $method) = explode('.', $interface);
         if(strpos($path, '/')) {
             $pathArray = explode('/', $path);
             foreach($pathArray as $v) {
@@ -58,9 +64,8 @@ class Iinterface {
             self::$interfaces[$class] = new $class();
         }
         
-        $resData = call_user_func_array(array(self::$interfaces[$class], $method), self::$route->paramets);
-        
-        self::res($resData);
+        $resData = call_user_func_array(array(self::$interfaces[$class], $method), $paramets);
+        return $resData;
     }
     
     /**
