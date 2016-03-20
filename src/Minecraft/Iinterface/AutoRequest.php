@@ -11,10 +11,10 @@ class AutoRequest extends \Minecraft\Iinterface\Iinterface {
             return false;
         }
         $this->frontRoute = $route;
-        $front->res = [];
+        $front->res = (object)[];
         
         foreach($this->frontRoute->autoRequests as $name=>$request) {
-            $front->res[$name] = $this->process($request, $this->frontRoute->paramets);
+            $front->res->$name = (object)$this->process($request, $this->frontRoute->paramets);
         }
     }
 }
