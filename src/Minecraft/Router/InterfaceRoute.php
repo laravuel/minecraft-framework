@@ -86,7 +86,7 @@ class InterfaceRoute extends Route {
                 foreach($currentInterface['get_paramets'] as $paramet_key=>$pattern) {
                     $getParamet = $_GET[$paramet_key];
                     if(is_array($getParamet)) {
-                        $getParamet = json_encode($getParamet);
+                        $getParamet = json_encode($getParamet, JSON_NUMERIC_CHECK);
                     }
                     $this->paramets[$paramet_key] = $_GET[$paramet_key];
                     if(!$pattern) {
@@ -102,7 +102,7 @@ class InterfaceRoute extends Route {
                 foreach($currentInterface['post_paramets'] as $paramet_key=>$pattern) {
                     $postParamet = $_POST[$paramet_key];
                     if(is_array($postParamet)) {
-                        $postParamet = json_encode($postParamet);
+                        $postParamet = json_encode($postParamet, JSON_NUMERIC_CHECK);
                     }
                     $this->paramets[$paramet_key] = $_POST[$paramet_key];
 
