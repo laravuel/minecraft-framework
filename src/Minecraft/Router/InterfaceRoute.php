@@ -101,18 +101,30 @@ class InterfaceRoute extends Route {
 
                 foreach($currentInterface['post_paramets'] as $paramet_key=>$pattern) {
                     $postParamet = $_POST[$paramet_key];
-                    if(is_array($postParamet)) {
-                        $postParamet = json_encode($postParamet, JSON_NUMERIC_CHECK);
-                    }
                     $this->paramets[$paramet_key] = $_POST[$paramet_key];
 
-                    if(!$pattern) {
-                        continue;
+                    if(is_array($pattern)) {
+                        foreach($pattern as $name=>$v) {
+                            if(!$v) {
+                                continue;
+                            }
+                            if(!preg_match('/^'.$v.'$/', $postParamet[$name], $m)) {
+                                $this->needParamets[] = $paramet_key.'.'.$name;
+                            }
+                        }
                     }
-                    if(!preg_match('/^'.$pattern.'$/', $postParamet, $m)) {
-                        $this->needParamets[] = $paramet_key;
+                    else {
+                        if(is_array($postParamet)) {
+                            $postParamet = json_encode($postParamet, JSON_NUMERIC_CHECK);
+                        }
+
+                        if(!$pattern) {
+                            continue;
+                        }
+                        if(!preg_match('/^'.$pattern.'$/', $postParamet, $m)) {
+                            $this->needParamets[] = $paramet_key;
+                        }
                     }
-                    
                 }
             }
             return $currentInterface;
