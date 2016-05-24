@@ -55,7 +55,7 @@ class Front {
      */
     public function resPretreat($data) {
         if($data['res_tpl']) {
-            $this->import($data['res_tpl']);
+            $this->import($data['res_tpl'], $data);
         }
         else {
             if($data['url']) {
@@ -89,7 +89,7 @@ class Front {
         }
     }
     
-    public function import($frontPath = '') {
+    public function import($frontPath = '', $args = []) {
         $path = \Minecraft\App::$config['fronts'];
         $path .= str_replace('.', '/', $frontPath);
         $tpl = $path.'.php';
@@ -98,6 +98,7 @@ class Front {
             echo '<h3 style="color:#666; font-family:\'微软雅黑\'; text-align:center; margin:10% 0; font-size:30px; font-weight:bold;">Front Error : '.$frontPath.'</h3>';
             return false;
         }
+        extract($args);
         include $tpl;
     }
 }

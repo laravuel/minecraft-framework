@@ -19,7 +19,7 @@ class Config {
     
     public function __get($name) {
         $value = $this->config[$name];
-        if(!is_null(json_decode($value))) {
+        if(!is_array($value) && !is_null(json_decode($value))) {
             $value = json_decode($value);
         }
         return $value;
