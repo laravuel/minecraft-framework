@@ -12,4 +12,5 @@ class Model extends Eloquent {
         $capsule->bootEloquent();
     }
 }
+class DB extends Capsule {}
 ?>
