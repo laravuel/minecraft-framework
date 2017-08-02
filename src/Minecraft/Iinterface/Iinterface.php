@@ -13,7 +13,7 @@ class Iinterface {
         $this->pager['page'] = intval($_GET['page']) ? intval($_GET['page']) : 0;
         $this->pager['length'] = intval($_GET['length']) ? intval($_GET['length']) : 10;
         $this->pager['start'] = $this->pager['page'] * $this->pager['length'] - $this->pager['length'];
-        $this->pager = json_decode(json_encode($this->pager));
+        $this->pager = json_decode(json_encode($this->pager, JSON_NUMERIC_CHECK));
     }
     
     public static function init(\Minecraft\Router\Route $route) {
@@ -112,7 +112,7 @@ class Iinterface {
             // 'result' => [self::$route->resName => $resData]
             'result' => $resData
         ];
-        exit(json_encode($data));
+        exit(json_encode($data, JSON_NUMERIC_CHECK));
     }
     
     /**

@@ -19,8 +19,8 @@ class App {
         self::$config['routes'] = $config['AppPath'].$config['Routes'];
         self::$config['models'] = $config['AppPath'].$config['Models'];
         self::$config['config'] = $config['AppPath'].$config['Config'];
-        
-        $databaseConfig         = Config::get('database')->allArray();
+        $config = new Config;
+        $databaseConfig         = $config->get('database')->allArray();
         $frontRouteConfig       = include self::$config['routes'].'front.php';
         $interfaceRouteConfig   = include self::$config['routes'].'interface.php';
         
